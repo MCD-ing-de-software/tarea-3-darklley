@@ -73,6 +73,17 @@ class TestDataCleaner(unittest.TestCase):
         pdt.assert_series_equal(result["name"], expected_name_series, check_names=True)
 
     def test_drop_invalid_rows_removes_rows_with_missing_values(self):
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        result = cleaner.drop_invalid_rows(df, ["name", "age"])
+
+        # Verificar que no hay valores faltantes en esas columnas
+        self.assertEqual(result["name"].isna().sum(), 0)
+        self.assertEqual(result["age"].isna().sum(), 0)
+
+        # Verificar que hay menos filas que el original
+        self.assertLess(len(result), len(df))
         """Test que verifica que el método drop_invalid_rows elimina correctamente las filas
         que contienen valores faltantes (NaN o None) en las columnas especificadas.
         
