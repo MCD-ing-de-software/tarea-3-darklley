@@ -104,6 +104,16 @@ class TestStatisticsUtils(unittest.TestCase):
         """
 
     def test_zscore_has_mean_zero_and_unit_std(self):
+        utils = StatisticsUtils()
+        arr = [10, 20, 30, 40]
+
+        result = utils.zscore(arr)
+
+        mean_result = np.mean(result)
+        std_result = np.std(result)
+
+        self.assertAlmostEqual(mean_result, 0.0, places=7)
+        self.assertAlmostEqual(std_result, 1.0, places=7)
         """Test que verifica que el método zscore calcula correctamente los z-scores
         de una secuencia numérica, comprobando que el resultado tiene media cero y
         desviación estándar unitaria.
