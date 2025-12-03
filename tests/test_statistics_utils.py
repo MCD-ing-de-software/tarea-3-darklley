@@ -69,6 +69,17 @@ class TestStatisticsUtils(unittest.TestCase):
         """
 
     def test_moving_average_raises_for_invalid_window(self):
+        utils = StatisticsUtils()
+        arr = [1, 2, 3]
+
+        # Window = 0
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=0)
+
+        # Window mayor que la longitud del array
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=10)
+
         """Test que verifica que el método moving_average lanza un ValueError cuando
         se proporciona una ventana (window) inválida.
         
