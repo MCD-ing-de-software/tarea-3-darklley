@@ -110,6 +110,21 @@ class TestDataCleaner(unittest.TestCase):
         """
 
     def test_trim_strings_strips_whitespace_without_changing_other_columns(self):
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        result = cleaner.trim_strings(df, ["name"])
+
+        # Verificar que el DataFrame original NO fue modificado
+        self.assertEqual(df.loc[0, "name"], " Alice ")
+        self.assertEqual(df.loc[3, "name"], " Carol  ")
+
+        # Verificar que en el resultado los strings están recortados
+        self.assertEqual(result.loc[0, "name"], "Alice")
+        self.assertEqual(result.loc[3, "name"], "Carol")
+
+        # Verificar que la columna no especificada ("city") no cambia
+        pdt.assert_series_equal(result["city"], df["city"])
         """Test que verifica que el método trim_strings elimina correctamente los espacios
         en blanco al inicio y final de los valores en las columnas especificadas, sin modificar
         el DataFrame original ni las columnas no especificadas.
