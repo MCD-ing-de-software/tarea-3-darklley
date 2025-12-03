@@ -190,6 +190,11 @@ class TestDataCleaner(unittest.TestCase):
         """
 
     def test_remove_outliers_iqr_raises_typeerror_for_non_numeric_column(self):
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        with self.assertRaises(TypeError):
+            cleaner.remove_outliers_iqr(df, "city")
         """Test que verifica que el método remove_outliers_iqr lanza un TypeError cuando
         se llama con una columna que no es de tipo numérico.
         
