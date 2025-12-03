@@ -90,6 +90,11 @@ class TestStatisticsUtils(unittest.TestCase):
         """
 
     def test_moving_average_only_accepts_1d_sequences(self):
+        utils = StatisticsUtils()
+        arr = [[1, 2], [3, 4]]
+
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=2)
         """Test que verifica que el método moving_average lanza un ValueError cuando
         se llama con una secuencia multidimensional.
         
