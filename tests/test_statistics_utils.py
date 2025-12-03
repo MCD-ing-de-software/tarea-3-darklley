@@ -126,6 +126,12 @@ class TestStatisticsUtils(unittest.TestCase):
         """
 
     def test_zscore_raises_for_zero_std(self):
+        utils = StatisticsUtils()
+        arr = [5, 5, 5]
+
+        with self.assertRaises(ValueError):
+            utils.zscore(arr)
+
         """Test que verifica que el método zscore lanza un ValueError cuando
         se llama con una secuencia que tiene desviación estándar cero
         (todos los valores son iguales).
