@@ -142,6 +142,17 @@ class TestStatisticsUtils(unittest.TestCase):
         """
 
     def test_min_max_scale_maps_to_zero_one_range(self):
+        utils = StatisticsUtils()
+        arr = [2, 4, 6]
+
+        result = utils.min_max_scale(arr)
+
+        # Verificar mínimo y máximo
+        self.assertAlmostEqual(np.min(result), 0.0, places=7)
+        self.assertAlmostEqual(np.max(result), 1.0, places=7)
+
+        expected = np.array([0.0, 0.5, 1.0])
+        npt.assert_allclose(result, expected, rtol=1e-7, atol=1e-7)
         """Test que verifica que el método min_max_scale escala correctamente una secuencia
         numérica al rango [0, 1], donde el valor mínimo se mapea a 0 y el máximo a 1.
         
