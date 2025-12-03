@@ -138,6 +138,11 @@ class TestDataCleaner(unittest.TestCase):
         """
 
     def test_trim_strings_raises_typeerror_for_non_string_column(self):
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        with self.assertRaises(TypeError):
+            cleaner.trim_strings(df, ["age"])
         """Test que verifica que el método trim_strings lanza un TypeError cuando
         se llama con una columna que no es de tipo string.
         
