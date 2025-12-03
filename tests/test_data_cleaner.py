@@ -153,6 +153,16 @@ class TestDataCleaner(unittest.TestCase):
         """
 
     def test_remove_outliers_iqr_removes_extreme_values(self):
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        result = cleaner.remove_outliers_iqr(df, "age", factor=1.5)
+
+        # Verificar que el outlier (120) fue eliminado
+        self.assertNotIn(120, result["age"].values)
+
+        # Verificar que al menos un valor válido permanece
+        self.assertIn(25, result["age"].values)
         """Test que verifica que el método remove_outliers_iqr elimina correctamente los
         valores extremos (outliers) de una columna numérica usando el método del rango
         intercuartílico (IQR).
